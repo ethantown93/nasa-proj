@@ -1,0 +1,35 @@
+<!-- Jumbo-tron -->
+<div class="home-wrapper">
+    <section class='jumbo-tron'>
+        <p>Explore the wonders of the Cosmos using NASA's API</p>
+        <h1>NASA API Project</h1>
+        <p id='credit'>Design and code by Ethan Townsend</p>
+    </section>
+    
+    <!-- Photo of the Day -->
+    
+    <section class='photo-of-the-day'>
+        <div class="wrapper" data-aos="flip-left">
+            <h1>NASA's Photo/Video of the day</h1>
+            <div class="container" *ngIf='imageOfTheDay'>
+                <div class="col-md-5" data-aos="fade-up">
+                    <p>Photo title:</p>
+
+                    <p>{{ imageOfTheDay.title }}</p>
+                    <img *ngIf='!containsYoutube' class='container-img' src="{{ imageOfTheDay.url }}" alt="">
+                    <iframe *ngIf='containsYoutube' class='container-iframe' width="420" height="315"
+                    [src]="getYoutubeUrl()">
+                    </iframe>
+                </div>
+                <div class="col-md-7" data-aos="fade-down">
+                    <p>Photo taken on: {{ imageOfTheDay.date }}</p>
+                    <blockquote>
+                        <q cite="https://www.nasa.gov/">{{ imageOfTheDay.explanation }}</q>
+                    </blockquote>
+                    <p> Photo credit: &copy; {{ imageOfTheDay.copyright }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

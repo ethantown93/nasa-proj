@@ -1,0 +1,53 @@
+<div class="wrapper">
+    <h3>Search NASA's database for amazing photos!</h3>
+    <form class='photo-form' #form='ngForm' (ngSubmit)='onSubmit(form.value); form.reset()'>
+        <div class="form-group">
+            <input type="text" name='photoQuery' ngModel class='form-control' placeholder='Enter a search: Example, search "Nebula"' required>
+        </div>
+        <button type='submit' class='btn btn-primary btn-block rounded-pill'>Search their database!</button>
+    </form>
+</div>
+
+<div class="container" *ngIf='photoData !== undefined'> 
+    <div class="card" *ngFor='let item of photoData.items'>
+        <div *ngFor='let x of item.links'>
+            <div *ngFor='let y of item.data'>
+                <div class="card-body" data-aos="zoom-in">
+                    <div class="card-image-top">
+                        <div class="fade-in">
+                            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#photoModal' (click)='photoInfo(x.href, y.title, y.date_created, y.description, y.nasa_id)'>Click for more information!</button>
+                        </div>
+                        <img src="{{ x.href }}" alt="image">
+                    </div>
+                    <hr>
+                    <div class="card-title">
+                        <p><strong>Photo Title:</strong> {{ y.title }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="photoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-imgage-top photo-modal-img">
+                        <img src="{{ photoInformation.href }}" alt="">
+                    </div>
+                    <hr>
+                    <h4 class="card-title">
+                            {{photoInformation.title}}
+                    </h4>
+                    <p class='card-text'>Date Created: {{ photoInformation.date_created | date: 'dd/MM/yyyy'}}</p>
+                    <p class='card-text'>{{ photoInformation.nasaId }}</p>
+                    <p class='card-text'>description: {{ photoInformation.description }}</p>
+                </div>
+                <a type='button' data-dismiss='modal'><i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

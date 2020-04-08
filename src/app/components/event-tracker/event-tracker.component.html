@@ -1,0 +1,37 @@
+<div class="wrapper" *ngIf='events'>
+    <h3>Live events data from: {{ events.description }}</h3>
+    <div class="row">
+        <div class="col-md-6 first">
+            <ul class='first-div-ul'>
+                <li *ngFor='let event of events.events | paginate: { itemsPerPage:4, currentPage: p }'>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                               <strong>Title:</strong> {{ event.title }}
+                            </div>
+                            <div class="card-text">
+                                <p *ngFor='let source of event.sources'>
+                                    <strong>link to source: </strong> <a href="{{ source.url }}" alt='event source' target='blank'>Click to view source</a>
+                                </p>
+                                 <p class='g-maps' (click)='getGoogleLocation(event.id)'><strong><i class="fa fa-map" aria-hidden="true"></i>
+                                     Click to Get Google Maps location</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class='pagination'>
+                <pagination-controls  (pageChange)='p =$event' ></pagination-controls>
+            </div>
+        </div>
+        <div class="col-md-5 second" *ngIf='longitude !== undefined' data-aos="flip-left">
+            <agm-map [latitude]='latitude' [longitude]='longitude'>
+                <agm-marker [latitude]='latitude' [longitude]='longitude'></agm-marker>
+            </agm-map>
+        </div>
+    </div>
+</div>
+
+<div class="loader" *ngIf='!events'>
+    <img class='loader-gif' src="./assets/gif/loader.gif" alt="loader">
+</div>
