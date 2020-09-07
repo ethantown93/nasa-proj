@@ -1,7 +1,11 @@
-<div class="wrapper" *ngIf='events'>
+<!-- <div class="wrapper" *ngIf='events'>
     <h3>Live events data from: {{ events.description }}</h3>
-    <div class="row">
-        <div class="col-md-6 first">
+
+</div> -->
+
+<div class='map-container' *ngIf='geojson.features.length > 0'>
+    <!-- <div class="row">
+        <div class="col-md-4 first">
             <ul class='first-div-ul'>
                 <li *ngFor='let event of events.events | paginate: { itemsPerPage:4, currentPage: p }'>
                     <div class="card">
@@ -13,8 +17,7 @@
                                 <p *ngFor='let source of event.sources'>
                                     <strong>link to source: </strong> <a href="{{ source.url }}" alt='event source' target='blank'>Click to view source</a>
                                 </p>
-                                 <p class='g-maps' (click)='getGoogleLocation(event.id)'><strong><i class="fa fa-map" aria-hidden="true"></i>
-                                     Click to Get Google Maps location</strong></p>
+                        
                             </div>
                         </div>
                     </div>
@@ -24,12 +27,11 @@
                 <pagination-controls  (pageChange)='p =$event' ></pagination-controls>
             </div>
         </div>
-        <div class="col-md-5 second" *ngIf='longitude !== undefined' data-aos="flip-left">
-            <agm-map [latitude]='latitude' [longitude]='longitude'>
-                <agm-marker [latitude]='latitude' [longitude]='longitude'></agm-marker>
-            </agm-map>
+
+        <div class="col-md-7 second" *ngIf='longitude !== undefined' data-aos="flip-left">
         </div>
-    </div>
+    </div> -->
+    <div id='map' class='match-parent' ></div>
 </div>
 
 <div class="loader" *ngIf='!events'>
